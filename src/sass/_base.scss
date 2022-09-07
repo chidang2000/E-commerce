@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: "Roboro", sans-serif;
+  font-size: 1.3rem;
+}
+
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+@each $color, $val in $colors {
+  .color-#{$color} {
+    color: $val;
+  }
+
+  .bg-#{$color} {
+    background-color: $val;
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-#{$val} {
+    grid-template-columns: repeat($val, 1fr);
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-md-#{$val} {
+    @include tablet {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-sm-#{$val} {
+    @include mobile {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: auto;
+
+  @include tablet {
+    padding: 0 20px;
+  }
+
+  @include mobile {
+    padding: 0 10px;
+  }
+}
+.shrink {
+  height: $header-shink-height;
+  box-shadow: $box-shadow;
+  z-index: 100;
+}
+.main {
+  margin-top: $header-height;
+  margin-bottom: 2rem;
+  min-height: 100vh;
+
+  @include tablet {
+    margin-top: calc(#{$header-tablet-height} + 20px);
+  }
+  @include mobile {
+    margin-top: calc(#{$header-tablet-height} + 10px);
+  }
+}
+
+.grid {
+  display: grid;
+}

@@ -1,0 +1,69 @@
+@import "../../sass/index.scss";
+
+.catalog {
+  @include flex(flex-start, flex-start);
+
+  &__watchfilter {
+    display: none;
+    @include mobile {
+      display: block;
+    }
+  }
+  &__filter {
+    width: 20%;
+
+    @include tablet {
+      width: unset;
+    }
+
+    @include mobile {
+      position: fixed;
+      z-index: 90;
+      background-color: $primary-bg;
+      padding: 1rem;
+      left: 0;
+      width: max-content;
+      top: $header-mobile-height;
+      box-shadow: $box-shadow;
+      transform: translateX(-100%);
+      transition: all 0.25s linear;
+    }
+
+    &.active {
+      transform: translateX(0);
+    }
+    &__close {
+      display: none;
+      @include mobile {
+        display: block;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+    }
+
+    &__widget {
+      margin-bottom: 2rem;
+
+      &__title {
+        font-weight: 600;
+        font-size: 1.5rem;
+        text-transform: capitalize;
+        margin-bottom: 2rem;
+      }
+      &__content {
+        color: $text-second-color;
+        &__item {
+          margin-bottom: 1rem;
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+
+  &__content {
+    flex: 1;
+    @include tablet {
+      width: 100%;
+    }
+  }
+}

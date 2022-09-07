@@ -1,0 +1,160 @@
+@import "../../sass/index.scss";
+
+.header {
+  background-color: $primary-bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  height: $header-height;
+  transition: all 0.25s linear;
+
+  @include tablet {
+    height: $header-tablet-height;
+    box-shadow: $box-shadow;
+  }
+  @include mobile {
+    height: $header-mobile-height;
+  }
+  &__container {
+    height: 100%;
+  }
+  &__logo {
+    @include tablet {
+      display: none;
+    }
+    @include flex(center, center);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+
+    img {
+      height: 2.5rem;
+    }
+  }
+
+  &__menu {
+    @include flex(center, space-between);
+    height: 100%;
+    font-size: 1.5rem;
+
+    &__left,
+    &__right {
+      @include flex(center, center);
+      gap: 4rem;
+
+      @include mobile {
+        gap: 2rem;
+      }
+    }
+    &__left {
+      &__close {
+        display: none;
+
+        @include tablet {
+          display: block;
+          position: absolute;
+          left: 2rem;
+          top: 1.5rem;
+          font-size: 2.5rem;
+        }
+      }
+      @include tablet {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: $primary-bg;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 4rem;
+        transform: translateX(-100%);
+        transition: all 0.25s linear;
+        z-index: 999;
+        &__item {
+          width: 100%;
+          text-align: center;
+          padding: 1rem 0;
+        }
+        &.active {
+          transform: translateX(0);
+        }
+      }
+    }
+    &__right {
+      &__item {
+        @include flex(center, center);
+
+        &:first-child {
+          @include flex(center, center);
+          border: 1px solid $text-second-color;
+          border-radius: 1rem;
+          overflow: hidden;
+          padding: 0.5rem 1rem;
+        }
+        &__input {
+          position: relative;
+          height: 100%;
+          font-size: 1.5rem;
+          outline: none;
+          border: none;
+        }
+      }
+
+      @include tablet {
+        margin-left: auto;
+      }
+      @include mobile {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__item {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 2rem;
+      transition: all 0.25s linear;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+    &__item.active {
+      font-weight: 600;
+      color: $primary-color;
+    }
+    &__mobile {
+      display: none;
+
+      @include tablet {
+        display: block;
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+.cart {
+  position: relative;
+}
+
+.value-cart {
+  position: absolute;
+  top: -6px;
+  left: 55%;
+  color: $text-white-color;
+  background-color: $primary-color;
+  border-radius: 1rem;
+  padding: 0;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  text-align: center;
+  height: 2rem;
+  min-width: 2rem;
+
+  @include tablet {
+  }
+}

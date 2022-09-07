@@ -1,0 +1,34 @@
+@import "../../sass/index.scss";
+
+.custom-checkbox {
+  @include flex(center, flex-start);
+  cursor: pointer;
+  &:hover {
+    color: $primary-color;
+  }
+  &__input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  &__checkmark {
+    margin-right: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border: 1px solid $text-second-color;
+  }
+
+  &__icon {
+    transform: scale(0);
+    transition: all 0.25s linear;
+  }
+  &__input:checked ~ &__checkmark {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    color: $text-white-color;
+  }
+  &__input:checked ~ &__checkmark > &__icon {
+    transform: scale(1);
+  }
+}

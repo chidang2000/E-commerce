@@ -1,0 +1,30 @@
+@import "../../sass/index.scss";
+
+.search-result {
+  padding: 2rem;
+  width: 361px;
+  height: 361px;
+  background-color: $primary-bg;
+  overflow: auto;
+  &__info {
+    @include flex(center, space-between);
+    margin-bottom: 1rem;
+    gap: 5rem;
+    &__image {
+      width: 40px;
+      height: 40px;
+      border-radius: 100rem;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &__name {
+      flex: 1;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+}

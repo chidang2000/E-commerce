@@ -1,0 +1,54 @@
+@import "../../sass/index.scss";
+
+.cart {
+  @include flex(flex-start, flex-start);
+  @include tablet {
+    @include flex(center, center);
+    flex-direction: column-reverse;
+    padding: 0 4rem;
+  }
+
+  @include mobile {
+    padding: 0;
+  }
+  @include mobile {
+    flex-wrap: wrap;
+  }
+
+  &__info {
+    margin-right: 3rem;
+    margin-top: 3rem;
+    box-shadow: $box-shadow;
+    position: sticky;
+    top: calc(#{$header-shink-height} + 20px);
+    padding: 2rem;
+
+    &__txt {
+      margin-bottom: 1rem;
+      p {
+        font-size: 1.5rem;
+      }
+      &__price {
+        @include flex(center, space-between);
+        color: red;
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        text-transform: uppercase;
+      }
+    }
+
+    &__btn {
+      button {
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+      }
+    }
+  }
+  &__list {
+    flex: 1;
+    @include tablet {
+      width: 100%;
+    }
+  }
+}
