@@ -9,6 +9,7 @@ import size from "../../assets/fake-data/product-size";
 import Infinity from "../../components/Infinity";
 import Button from "../../components/Button";
 import { AiOutlineClose } from "react-icons/ai";
+
 const Catalog = () => {
   const initFilter = {
     category: [],

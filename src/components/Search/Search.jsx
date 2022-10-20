@@ -1,34 +1,50 @@
 import Tippy from "@tippyjs/react/headless";
-import React, { useEffect, useRef, useState } from "react";
-import { BiSearch } from "react-icons/bi";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import productData from "../../assets/fake-data/products";
-import { useDebounce } from "../hooks";
+import { searchItem } from "../../redux/search/searchSlice";
+// import { useDebounce } from "../hooks";
 import "./Search.scss";
+import { Link } from "react-router-dom";
 const Search = () => {
   const inputRef = useRef();
   const allProduct = productData.getAllProducts();
   const [searchValue, setSearchValue] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  // const [searchResult, setSearchResult] = useState([]);
   const [showResult, setShowResult] = useState(false);
-  const debouncedValue = useDebounce(searchValue, 200);
-  const productItem = productData.getProductByName(debouncedValue);
+  // const debouncedValue = useDebounce(searchValue, 200);
+  // const productItem = productData.getProductByName(debouncedValue);
+  const a = useSelector((state) => state.search.search);
+  console.log(a);
+
+  const dispatch = useDispatch();
 
   const handleInput = (e) => {
     const searchValue = e.target.value;
     if (!searchValue.startsWith(" ")) {
       setSearchValue(searchValue);
+      setShowResult(true);
+      dispatch(searchItem(searchValue));
+    }
+
+    if (searchValue.length <= 0) {
+      setShowResult(false);
     }
   };
   const handleHideResult = () => {
     setShowResult(false);
   };
 
-  useEffect(() => {
-    if (!productItem) {
-      return;
-    }
-    setSearchResult(allProduct);
-  }, []);
+  const searchResult = useSelector((state) => {
+    const result = allProduct.filter((item) => {
+      return item.title.toLocaleLowerCase().includes(state.search.search);
+    });
+    return result;
+  });
+
+  const handleClickItemSearch = () => {
+    setShowResult(false);
+  };
 
   return (
     <Tippy
@@ -42,12 +58,17 @@ const Search = () => {
           <div>
             {/* <h4 className="search-title">Account</h4> */}
             {searchResult.map((result, index) => (
-              <div key={index} className="search-result__info">
-                <div className="search-result__info__image">
-                  <img src={result.image01} alt="" />
+              <Link
+                to={`/catalog/${result.slug}`}
+                onClick={handleClickItemSearch}
+              >
+                <div key={index} className="search-result__info">
+                  <div className="search-result__info__image">
+                    <img src={result.image01} alt="" />
+                  </div>
+                  <h3 className="search-result__info__name">{result.title}</h3>
                 </div>
-                <h3 className="search-result__info__name">{result.title}</h3>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -59,12 +80,12 @@ const Search = () => {
           value={searchValue}
           spellCheck={false}
           onChange={handleInput}
-          onFocus={() => setShowResult(true)}
+          // onFocus={() => setShowResult(true)}
           type="text"
           placeholder="Enter item..."
           className="header__menu__right__item__input"
         />
-        <BiSearch />
+        {/* <BiSearch /> */}
       </div>
     </Tippy>
   );

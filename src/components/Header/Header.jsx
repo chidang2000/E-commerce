@@ -16,7 +16,6 @@ const Header = () => {
   const cartTotalQuantity = useSelector((state) => state.cartItems.value);
 
   const [totalProducts, setTotalProducts] = useState(0);
-  console.log(cartTotalQuantity);
 
   useEffect(() => {
     setTotalProducts(
